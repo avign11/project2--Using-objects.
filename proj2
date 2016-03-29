@@ -38,6 +38,7 @@ void draw()
   movesam();
   message();
   dog();
+  puppy();
 }                   
 
 
@@ -146,9 +147,22 @@ void dog()
   line ( 300, 300, 275, 275 );
   line ( 325, 350, 325, 370 );
   line ( 385, 350, 385, 370 );
-  
 }
-//MESSAGES: title and author
+// PUPPY
+void puppy()
+{
+  stroke ( 165, 42, 42 );
+  fill ( 165, 42, 42 );
+  rect ( 100, 400, 80, 35 );
+  rect ( 150, 400, 40, -15 );  
+  fill (0);
+  ellipse ( 180, 392, 7, 7 );
+  //line ( 300, 300, 275, 275 );
+  //line ( 325, 350, 325, 370 );
+  //line ( 385, 350, 385, 370 );
+}
+
+//MESSAGES: title and author 
 void message()
 {
   fill(255, 255, 255);
