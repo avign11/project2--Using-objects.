@@ -191,8 +191,7 @@ void snowman()
   ellipse( x+105, y+308, 5, 5);  
   fill (0, 0, 0 );
   ellipse( x+95, y+308, 5, 5); 
-  //fill (0, 0, 0 );
-  //ellipse( x+100, y+305, 5, 5); 
+  
 }
 
 
