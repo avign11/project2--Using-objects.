@@ -39,6 +39,7 @@ void draw()
   message();
   dog();
   puppy();
+  snowman();
 }                   
 
 
@@ -153,14 +154,49 @@ void puppy()
 {
   stroke ( 165, 42, 42 );
   fill ( 165, 42, 42 );
-  rect ( 100, 400, 80, 35 );
-  rect ( 150, 400, 40, -15 );  
+  rect ( 100, 450, 80, 35 );
+  rect ( 150, 450, 40, -15 );  
   fill (0);
-  ellipse ( 180, 392, 7, 7 );
+  ellipse ( 180, 442, 7, 7 );
   //line ( 300, 300, 275, 275 );
   //line ( 325, 350, 325, 370 );
   //line ( 385, 350, 385, 370 );
 }
+
+//SHOW: draw a monster snowman
+void snowman()
+{     
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+300, 50, 50);      //head
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+350, 60, 60 );          //middle
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+400, 70, 70);            //bottom
+  fill (0, 0, 0 );
+  ellipse( x+100, y+350, 7, 7 );           //top button
+  fill (0, 0, 0 );
+  ellipse( x+100, y+375, 7, 7 );                // middle button
+  fill (0, 0, 0 );
+  ellipse( x+100, y+400, 7, 7 );            //bottom button
+  fill (0, 0, 0 );
+  ellipse( x+95, y+295, 7, 7);            // left eye
+  fill (0, 0, 0 );
+  ellipse( x+105, y+295, 7, 7);         //right eye
+  fill (0, 0, 0 );
+  ellipse( x+100, y+305, 5, 5);         //mouth
+  fill (0, 0, 0 );
+  ellipse( x+105, y+308, 5, 5);  
+  fill (0, 0, 0 );
+  ellipse( x+95, y+308, 5, 5); 
+  //fill (0, 0, 0 );
+  //ellipse( x+100, y+305, 5, 5); 
+}
+
+
+
 
 //MESSAGES: title and author 
 void message()
