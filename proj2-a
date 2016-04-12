@@ -1,0 +1,214 @@
+//Nanette CST112
+//Project 1 hero chases gold
+
+float x, y;                          // Position of hero and sun
+float xSun, ySun;  
+float horizon;
+float xSam = 0, ySam = 0;
+float xGold = random (50, width-50);
+float yGold = random (horizon+50, height-50);
+float dxSam = 2, dySam = 4;
+float xDog = 0, yDog = 0;
+float xPup = 0, yPup = 0;
+int score = 0;
+
+
+//SETUP: define screen size//
+void setup()
+{
+  size (700, 700 );
+  x = 0;
+  y = 0;      
+  xSun=  width/2;                  // Reset the sun position.
+  ySun=  100;
+  horizon = height/3;
+  frameRate = 30;
+  xSam = xSam + dxSam;
+  dxSam = (xGold - xSam) / frameRate;
+  xGold = random (50, width-50);
+  yGold = random (horizon+50, height-50);
+ // xDog = xDog + dxDog;
+ // dxDog = (xHero - xDog) / frameRate;
+  
+}
+
+
+//DRAW: sky, ground, house, tree, sun//
+void draw()
+{
+  scene();
+  movesun();
+  sam();
+  gold();
+  movesam();
+  message();
+  dog();
+  pup();
+  reset();
+}                   
+
+
+//SCENE:
+void scene()
+{           
+  stroke ( 0, 0, 0 );
+  background ( 0, 75, 255 );          //sky            
+  fill ( 0, 255, 0 );
+  rect ( x, horizon, width, 600 );    //green ground
+  fill (255, 255, 0 );
+  ellipse( xSun, ySun, 50, 50 );      //sun
+  fill (165, 42, 42 );                //tree trunk       
+  rect  ( 450, horizon-50, 20, 50);
+  fill (0, 127, 0 );                  //tree leaves        
+  ellipse ( 460, horizon-80, 60, 60 );
+  fill (165, 42, 42 );                   //brown roof house      
+  triangle ( 100, horizon-100, 200, horizon-150, 300, horizon-100 );   
+  fill ( 50, 50, 200 );                                               //blue base house
+  rect (125, horizon-100, 150, 100 );                  
+  fill ( 255, 0, 0 );                                                 //red door
+  rect ( 160, horizon-50, 35, 50 );                     
+  fill (0, 0, 0 );
+  ellipse( 170, horizon-25, 5, 5 );                                   //door knob
+  fill ( 255, 255, 255 );                                             //windows
+  rect (220, horizon-75, 35, 35 );
+
+  line (238, horizon-75, 238, horizon-40 );
+  line (220, horizon-57, 255, horizon-57 );
+}  
+
+//MOVE SUN
+void movesun()
+{
+  xSun=  xSun + 1;
+  if (xSun > width) xSun=  0;
+}
+
+//MOVE SAM
+void movesam()   
+{
+  // Go for the gold!
+  dxSam=  (xGold -xSam) / 30;
+  dySam=  (yGold -ySam) / 30;
+  // Move him.
+  xSam = xSam + dxSam;   
+  ySam = ySam + dySam;
+  // Check for gold nearby.
+  if (dist(xSam, ySam, xGold, yGold) < 2)
+  {
+    xGold=  random( 0, width );
+    yGold=  random( horizon, height );
+    score=  score + 100;
+   
+  }
+}
+
+//Move dog
+void movedog()   
+{
+  // Chase hero
+//  dxDog=  (xHero -xDog) / 30;
+ //dyDog=  (yHero -yDog) / 30;
+ // Move him.
+ //xDog = xDog + dxDog;   
+ //yDog = yDog + dyDog;
+  // Check for gold nearby.
+// if (dist(xDog, yDog, xHero, yHero) < 2)
+///  {
+//    xHero=  random( 0, width );
+// yHero=  random( horizon, height );   
+ }
+//MOVE GOLD  when mouse clicked.
+void mousePressed() 
+{
+  xGold = mouseX;
+  yGold = mouseY;
+}    
+
+
+//SAM:
+void sam()
+{   
+  fill ( 250, 50, 250 );                                        //body
+  rect (xSam+25, ySam+100, 80, 80 );
+  fill (0);                                                     //name
+  text ("SAM", xSam+50, ySam+150 );    
+  fill ( 204, 0, 204 );                                         //head
+  ellipse (xSam+65, ySam+70, 60, 60 );
+  fill ( 204, 0, 204 );                                         //left leg
+  ellipse ( xSam+45, ySam+185, 20, 10 );
+  fill ( 204, 0, 204 );                                         //right leg
+  ellipse ( xSam+85, ySam+185, 20, 10 );
+  fill ( 255, 255, 255 );                                       //left eye
+  ellipse ( xSam+50, ySam+70, 10, 20 );
+  fill ( 255, 255, 255 );                                       //right eye
+  ellipse ( xSam+80, ySam+70, 10, 20 );
+  fill ( 0, 0, 0 );                                            //left pupil
+  ellipse ( xSam+50, ySam+70, 5, 5 );
+  fill ( 0, 0, 0 );                                             //right pupil
+  ellipse ( xSam+80, ySam+70, 5, 5 );
+}
+//GOLD NUGGET:
+void gold()
+{  
+  stroke (255, 255, 0 );
+  fill (255, 255, 0 );
+  triangle ( xGold+00, yGold+00, xGold+20, yGold+00, xGold+10, yGold+10 );
+  stroke (255, 255, 0 );
+  fill (255, 255, 0 );
+  triangle ( xGold+0, yGold+05, xGold+20, yGold+05, xGold+10, yGold-5 );
+}
+//Dog
+void dog()
+{ 
+  
+  stroke ( 255, 0, 0 );
+  fill ( 255, 0, 0 );  
+  rect ( xDog+300, yDog+300, 100, 50 );
+  fill (0);
+  text ("Clifford", 335, 330 );
+  stroke ( 255, 0, 0 );
+  fill ( 255, 0, 0 );
+  rect ( xDog+375, yDog+300, 50, -25 );  
+  fill (0);
+  ellipse ( xDog+410, 285, 10, 10 );
+  stroke (0);
+  strokeWeight (3);
+  line ( xDog+300, yDog+300, xDog+275, yDog+275 );
+  line ( xDog+325, yDog+350, xDog+325, yDog+370 );
+  line ( xDog+385, yDog+350, xDog+385, yDog+370 );
+}
+// PUPPY
+void pup()
+{
+  stroke ( 0, 0, 255 );
+  fill ( 0, 0, 255 );
+  rect ( xPup+100, yPup+400, 80, 35 );
+  fill (0);
+  text ("Blue", 125, 425 );
+  stroke ( 0, 0, 255 );
+  fill ( 0, 0, 255 );
+  rect ( xPup+150, yPup+400, 40, -15 );  
+  fill (0);
+  ellipse ( xPup+180, yPup+392, 8, 8 );
+  stroke (0);
+  strokeWeight (3);
+  line ( xPup+100, yPup+400, xPup+75, yPup+385 );
+  line ( xPup+115, yPup+435, xPup+115, yPup+450 );
+  line ( xPup+170, yPup+435, xPup+170, yPup+450 );
+  strokeWeight (1);
+}
+//reset score
+void reset() {                        
+  if ( score >= 1000 ) 
+    score = 0;
+}
+
+//MESSAGES: title and author 
+void message()
+{
+  fill(255, 255, 255);
+  text ("Hero chases gold", 10, 20 );
+  fill (0);
+  text ("Nanette, CST112", 10, height -10 );
+  text ("SCORE =" +score,  410, height -10 );
+}
