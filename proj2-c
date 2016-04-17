@@ -1,0 +1,54 @@
+//Nanette Avignone CST112
+//Project 2
+
+float horizon;
+float xSun, ySun;
+int score=0;
+
+Nugget gold;
+Hero sam;
+Monster bumble;
+Dog clifford, blue;
+
+///SETUP///
+void setup() {
+  size (700, 700);
+  horizon=height/3;
+  xSun=  width/2;                  // Reset the sun position.
+  ySun=  100;
+}
+//SCENE//
+
+  stroke ( 0, 0, 0 );
+  background ( 0, 75, 255 );          //sky            
+  fill ( 0, 255, 0 );
+  rect ( x, horizon, width, 600 );    //green ground
+  fill (255, 255, 0 );
+  ellipse( xSun, ySun, 50, 50 );      //sun
+  fill (165, 42, 42 );                //tree trunk       
+  rect  ( 450, horizon-50, 20, 50);
+  fill (0, 127, 0 );                  //tree leaves        
+  ellipse ( 460, horizon-80, 60, 60 );
+  fill (165, 42, 42 );                   //brown roof house      
+  triangle ( 100, horizon-100, 200, horizon-150, 300, horizon-100 );   
+  fill ( 50, 50, 200 );                                               //blue base house
+  rect (125, horizon-100, 150, 100 );                  
+  fill ( 255, 0, 0 );                                                 //red door
+  rect ( 160, horizon-50, 35, 50 );                     
+  fill (0, 0, 0 );
+  ellipse( 170, horizon-25, 5, 5 );                                   //door knob
+  fill ( 255, 255, 255 );                                             //windows
+  rect (220, horizon-75, 35, 35 );
+  line (238, horizon-75, 238, horizon-40 );
+  line (220, horizon-57, 255, horizon-57 );
+
+
+  //MOVE SUN
+
+  xSun=  xSun + 1;
+  if (xSun > width) xSun=  0;
+  
+  class Nugget{
+    float x = random (50, width-50);
+    float y = random (horizon+50, height-50);
+    
