@@ -1,0 +1,138 @@
+//Nanette CST112
+//Project 1 hero chases gold
+
+float x, y;                          // Position of hero and sun
+float xDog = 0, yDog = 0;
+float xPup = 0, yPup = 0;
+
+
+  
+
+
+
+//DRAW: sky, ground, house, tree, sun//
+void draw()
+{ 
+  sam();
+  gold();
+  movesam(); 
+  dog();
+  puppy();    
+  snowman();
+}                   
+
+
+
+
+
+
+
+//MOVE SAM
+void movesam()   
+{
+  // Go for the gold!
+  dxSam=  (xGold -xSam) / 30;
+  dySam=  (yGold -ySam) / 30;
+  // Move him.
+  xSam = xSam + dxSam;   
+  ySam = ySam + dySam;
+  // Check for gold nearby.
+  if (dist(xSam, ySam, xGold, yGold) < 2)
+  {
+    xGold=  random( 0, width );
+    yGold=  random( horizon, height );
+    score=  score + 100;
+  }
+}
+
+
+   
+
+
+
+  
+
+
+//Dog
+void dog()
+{ 
+  stroke ( 255, 0, 0 );
+  fill ( 255, 0, 0 );  
+  rect ( xDog+300, yDog+300, 100, 50 );
+  fill (0);
+  text ("Clifford", 335, 330 );
+  stroke ( 255, 0, 0 );
+  fill ( 255, 0, 0 );
+  rect ( xDog+375, yDog+300, 50, -25 );  
+  stroke (0);
+  strokeWeight (2); 
+  fill (0, 200, 0 );
+  ellipse ( xDog+410, 285, 10, 10 );
+  stroke (0);
+  strokeWeight (3);
+  line ( xDog+300, yDog+300, xDog+275, yDog+275 );
+  line ( xDog+325, yDog+350, xDog+325, yDog+370 );
+  line ( xDog+385, yDog+350, xDog+385, yDog+370 );
+}
+// PUPPY
+void puppy()
+{
+  stroke ( 0, 0, 255 );
+  fill ( 0, 0, 255 );
+  rect ( xPup+100, yPup+450, 80, 35 );
+  fill (0);
+  text ("Blue", 125, 475 );
+  stroke ( 0, 0, 255 );
+  fill ( 0, 0, 255 );
+  rect ( xPup+150, yPup+450, 40, -15 );  
+  stroke (0);
+  strokeWeight (2); 
+  fill ( 255, 192, 203 );
+  ellipse ( xPup+180, yPup+442, 8, 8 );
+  stroke (0);
+  strokeWeight (3);
+  line ( xPup+100, yPup+450, xPup+75, yPup+435 );
+  line ( xPup+115, yPup+485, xPup+115, yPup+505 );
+  line ( xPup+170, yPup+485, xPup+170, yPup+505 );
+  strokeWeight (1);
+}
+
+//SHOW: draw a monster snowman
+void snowman()
+{     
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+300, 50, 50);      //head
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+350, 60, 60 );          //middle
+  fill ( 255, 255, 255 );
+  stroke ( 255, 255, 255 );
+  ellipse( x+100, y+400, 70, 70);            //bottom
+  fill (0, 0, 0 );
+  ellipse( x+100, y+350, 7, 7 );           //top button
+  fill (0, 0, 0 );
+  ellipse( x+100, y+375, 7, 7 );                // middle button
+  fill (0, 0, 0 );
+  ellipse( x+100, y+400, 7, 7 );            //bottom button
+  fill (0, 0, 0 );
+  ellipse( x+95, y+295, 7, 7);            // left eye
+  fill (0, 0, 0 );
+  ellipse( x+105, y+295, 7, 7);         //right eye
+  fill (0, 0, 0 );
+  ellipse( x+100, y+305, 5, 5);         //mouth
+  fill (0, 0, 0 );
+  ellipse( x+105, y+308, 5, 5);  
+  fill (0, 0, 0 );
+  ellipse( x+95, y+308, 5, 5);
+}
+
+//reset score
+void reset() 
+{                        
+  if ( score >= 1000 ) 
+    score = 0;
+}
+
+
+
