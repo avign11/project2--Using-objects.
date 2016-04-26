@@ -1,0 +1,188 @@
+//Nanette Avignone CST112
+//Project 2
+
+float x, y;
+float horizon;
+float xSun, ySun;
+int score=0;
+
+
+Nugget gold;
+Hero sam;
+//Monster bumble;
+Dog clifford;
+//Pup blue;
+
+///SETUP///
+void setup() {
+  size (700, 700);
+  x=0;
+  y=0;
+  horizon=height/3;
+  xSun=  width/2;                  // Reset the sun position.
+  ySun=  100;
+}
+
+//DRAW//
+void draw() 
+  scene();
+  movesun();
+  message();
+  reset ();
+
+//SCENE//
+void scene() {
+  stroke ( 0, 0, 0 );
+  background ( 0, 75, 255 );          //sky            
+  fill ( 0, 255, 0 );
+  rect ( x, horizon, width, 600 );    //green ground
+  fill (255, 255, 0 );
+  ellipse( xSun, ySun, 50, 50 );      //sun
+  fill (165, 42, 42 );                //tree trunk       
+  rect  ( 450, horizon-50, 20, 50);
+  fill (0, 127, 0 );                  //tree leaves        
+  ellipse ( 460, horizon-80, 60, 60 );
+  fill (165, 42, 42 );                   //brown roof house      
+  triangle ( 100, horizon-100, 200, horizon-150, 300, horizon-100 );   
+  fill ( 50, 50, 200 );                                               //blue base house
+  rect (125, horizon-100, 150, 100 );                  
+  fill ( 255, 0, 0 );                                                 //red door
+  rect ( 160, horizon-50, 35, 50 );                     
+  fill (0, 0, 0 );
+  ellipse( 170, horizon-25, 5, 5 );                                   //door knob
+  fill ( 255, 255, 255 );                                             //windows
+  rect (220, horizon-75, 35, 35 );
+  line (238, horizon-75, 238, horizon-40 );
+  line (220, horizon-57, 255, horizon-57 );
+  }
+
+//MOVE SUN
+  void movesun () {                     // move sun across sky
+    xSun=  xSun + 1;
+    if (xSun > width) xSun=  0;
+  }
+
+
+//CLASSES//
+  class Nugget {
+
+    float x = random (50, width-50);
+    float y = random (horizon+50, height-50);
+
+    //Display the gold
+    void show() {
+      stroke (255, 255, 0 );
+      fill (255, 255, 0 );
+      ellipse (x, y, 15, 10);
+      triangle ( x, y, x+20, y, x+10, y+10 );
+      stroke (255, 255, 0 );
+      fill (255, 255, 0 );
+      triangle ( x, y+05, x+20, y+05, x+10, y-5 );
+    }
+    
+    /*
+    //Move gold
+    void mousePressed() {
+      x = mouseX;
+      y = mouseY;
+    } 
+  */
+  
+  } //END NUGGET
+
+  class Hero {
+    float x = 0, y = 0;
+    float dx= 2, dy = 4;
+  //  frameRate = 30;
+  //  x = x + dx;
+  //  dx = (xGold - x) / frameRate;   //dont know how to address gold
+
+    //Display Hero
+    void show() {
+      fill ( 250, 50, 250 );                                        //body
+      rect (x+25, y+100, 80, 80 );
+      fill (0);                                                     //name
+      text ("SAM", x+50, y+150 );    
+      fill ( 204, 0, 204 );                                         //head
+      ellipse (x+65, y+70, 60, 60 );
+      fill ( 204, 0, 204 );                                         //left leg
+      ellipse ( x+45, y+185, 20, 10 );
+      fill ( 204, 0, 204 );                                         //right leg
+      ellipse ( x+85, y+185, 20, 10 );
+      fill ( 255, 255, 255 );                                       //left eye
+      ellipse ( x+50, y+70, 10, 20 );
+      fill ( 255, 255, 255 );                                       //right eye
+      ellipse ( x+80, y+70, 10, 20 );
+      fill ( 0, 0, 0 );                                            //left pupil
+      ellipse ( x+50, y+70, 5, 5 );
+      fill ( 0, 0, 0 );                                             //right pupil
+      ellipse ( x+80, y+70, 5, 5 );
+    }
+    
+    //Move Hero to gold
+    void move() {
+
+      dx=  (xGold -x) / 30;    //Go to the gold
+      dy=  (yGold -y) / 30;
+      xSam = x + dx;           //Move him
+      y = y + dy;
+
+      if (dist(x, y, xGold, yGold) < 10) { 
+
+        xGold=  random( 0, width );             // Check for gold nearby
+        yGold=  random( horizon, height );
+        score=  score + 100;
+      }
+
+      //MOVE GOLD  when mouse clicked.
+      void mousePressed() 
+      {
+        xGold = mouseX;
+        yGold = mouseY;
+      }
+    }
+    class Dog {
+      float x = 0, y = 0;
+      float dx= 2, dy = 4;
+      frameRate = 20;
+      x = x + dx;
+
+      //Display Dog
+      void show() { 
+        stroke ( 255, 0, 0 );
+        fill ( 255, 0, 0 );  
+        rect ( x+300, y+300, 100, 50 );
+        fill (0);
+        text ("Clifford", 335, 330 );
+        stroke ( 255, 0, 0 );
+        fill ( 255, 0, 0 );
+        rect ( x+375, y+300, 50, -25 );  
+        stroke (0);
+        strokeWeight (2); 
+        fill (0, 200, 0 );
+        ellipse ( x+410, 285, 10, 10 );
+        stroke (0);
+        strokeWeight (3);
+        line ( x+300, y+300, x+275, y+275 );
+        line ( x+325, y+350, x+325, y+370 );
+        line ( x+385, y+350, x+385, y+370 );
+      }
+     
+      
+      
+      
+      //Reset score
+      void reset() 
+      {                        
+        if ( score >= 1000 ) 
+          score = 0;
+      }
+      
+            //MESSAGES: title and author 
+      void message() {
+        fill(255, 255, 255);
+        text ("Hero chases gold", 10, 20 );
+        fill (0);
+        text ("Nanette, CST112", 10, height -10 );
+        text ("SCORE =" +score, 410, height -10 );
+      }
